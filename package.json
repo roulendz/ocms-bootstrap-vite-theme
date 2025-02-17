@@ -1,0 +1,35 @@
+{
+    "name": "ocms-bootstrap-vite-theme",
+    "description": "A simple example theme for OctoberCMS demonstrating integration with Bootstrap, ViteJS, and the OFFLINE Vite plugin for a fast and efficient development workflow.",
+    "version": "1.0.0",
+    "type": "module",
+    "keywords": [
+        "octobercms",
+        "theme",
+        "bootstrap",
+        "vite",
+        "starter-theme",
+        "frontend"
+    ],
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/marcsoler/ocms-bootstrap-vite-theme.git"
+    },
+    "bugs": {
+        "url": "https://github.com/marcsoler/ocms-bootstrap-vite-theme/issues"
+    },
+    "dependencies": {
+        "bootstrap": "^5.3.3"
+    },
+    "devDependencies": {
+        "@types/bootstrap": "^5.2.10",
+        "sass": "1.77.4",
+        "typescript": "^5.7.3",
+        "vite": "^6.1.0"
+    },
+    "license": "MIT"
+}
