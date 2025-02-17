@@ -1,14 +1,14 @@
 # ocms-bootstrap-vite-theme
 
 
-This theme is a basic starter theme for OctoberCMS, designed to demonstrate integration with BootstrapLoader, ViteJS, and the OFFLINE-GmbH Vite plugin. It provides a foundation for building modern OctoberCMS websites with a streamlined development workflow.
+This theme is a basic starter theme for OctoberCMS, designed to demonstrate integration with Bootstrap, ViteJS, and the OFFLINE-GmbH Vite plugin. It provides a foundation for building modern OctoberCMS websites with a streamlined development workflow.
 
 ## Built with
 
 *   **OctoberCMS:** [https://octobercms.com/](https://octobercms.com/) - The content management system this theme is built for.
 *   **ViteJS:** [https://vitejs.dev/](https://vitejs.dev/) - A fast, modern frontend build tool that provides a rapid development experience and optimized production builds. Used for asset bundling and development server.
 *   **OFFLINE-GmbH Vite Plugin for OctoberCMS:** [https://github.com/OFFLINE-GmbH/oc-vite-plugin](https://github.com/OFFLINE-GmbH/oc-vite-plugin) - An OctoberCMS plugin that seamlessly integrates ViteJS for asset management within your theme.
-*   **BootstrapLoader:** [https://getbootstrap.com/](https://getbootstrap.com/) -  A popular CSS framework for responsive and mobile-first web development. Used for styling and layout.
+*   **Bootstrap:** [https://getbootstrap.com/](https://getbootstrap.com/) -  A popular CSS framework for responsive and mobile-first web development. Used for styling and layout.
 
 ## Installation
 
