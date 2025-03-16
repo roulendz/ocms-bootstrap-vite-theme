@@ -1,4 +1,24 @@
+// filepath: src/ts/BootstrapLoader.ts
+
+/**
+ * Type definition for Bootstrap component instances
+ */
+interface BootstrapComponent {
+    dispose?: () => void;
+    [key: string]: any;
+}
+
 export class BootstrapLoader {
+    private static instances = new WeakMap<HTMLElement, BootstrapComponent>();
+    
+    static getInstance(el: HTMLElement): BootstrapComponent | undefined {
+        return this.instances.get(el);
+    }
+
+    static removeInstance(el: HTMLElement): void {
+        this.instances.delete(el);
+    }
+    
     /**
      * Map of Bootstrap components to their import functions
      */
@@ -12,6 +32,7 @@ export class BootstrapLoader {
         tab: () => import('bootstrap/js/dist/tab'),
         toast: () => import('bootstrap/js/dist/toast'),
         tooltip: () => import('bootstrap/js/dist/tooltip'),
+        offcanvas: () => import('bootstrap/js/dist/offcanvas'),
     };
 
     /**
@@ -25,22 +46,36 @@ export class BootstrapLoader {
         selector: string,
         options?: Partial<T>
     ): Promise<void> {
-
         try {
             const elements: HTMLElement[] = Array.from(document.querySelectorAll(selector));
 
             if (elements.length > 0) {
-                console.log(`Found ${elements.length} elements for ${componentName}, loading...`);
-
                 const module = await BootstrapLoader.componentMap[componentName]();
                 const Component = module.default;
+                console.log(`Found ${elements.length} elements for ${componentName}, loading...`);
+                
+                elements.forEach(el => {
+                    try {
+                        // Clean up existing instance before reinit
+                        if (BootstrapLoader.instances.has(el)) {
+                            const instance = BootstrapLoader.instances.get(el);
+                            if (instance && typeof instance.dispose === 'function') {
+                                instance.dispose();
+                            }
+                            BootstrapLoader.instances.delete(el);
+                        }
 
-                elements.forEach(el => new Component(el, options));
+                        // Store new instance
+                        const instance = new Component(el);
+                        BootstrapLoader.instances.set(el, instance);
+                    } catch (elementError) {
+                        console.error(`Error initializing ${componentName} on element:`, el, elementError);
+                    }
+                });
             }
         } catch (error) {
             console.error(`Error initializing ${componentName}:`, error);
         }
-
     }
 
     static async initializeTooltips(): Promise<void> {
@@ -83,7 +118,6 @@ export class BootstrapLoader {
      * Initializes all Bootstrap components at once
      */
     static async initializeAll(): Promise<void> {
-
         await Promise.all([
             this.initializeAlerts(),
             this.initializeCarousels(),
@@ -94,7 +128,6 @@ export class BootstrapLoader {
             this.initializeToasts(),
             this.initializeDropdowns(),
             this.initializeTabs(),
-
         ]);
     }
 

@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "typeRoots": ["./node_modules/@types", "./src/ts/types"],
         "target": "es2020",
         "module": "esnext",
         "lib": [
@@ -10,10 +11,11 @@
         "isolatedModules": true,
         "strict": true,
         "moduleResolution": "bundler",
-        "allowImportingTsExtensions": true
+        "noEmit": true
     },
     "include": [
-        "src/**/*.ts"
+        "src/**/*.ts",
+        "src/**/*.d.ts"
     ],
     "exclude": [
         "node_modules"

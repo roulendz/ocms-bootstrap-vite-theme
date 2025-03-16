@@ -1,0 +1,47 @@
+{##}
+<style>
+    .navbar-glass {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        border-radius: 10px;
+        padding: 10px 20px;
+    }
+    .navbar-glass a {
+        color: #000;
+        margin-right: 15px;
+        text-decoration: none;
+    }
+    .navbar-glass a:hover {
+        color: #555;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-glass">
+    <div class="container">
+        <a href="/" class="navbar-brand" data-turbo="true">
+            TimeBank
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/" data-turbo="true">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about-us" data-turbo="true">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/services" data-turbo="true">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/prices" data-turbo="true">Prices</a>
+                </li>
+            </ul>
+            <a href="/login" class="btn btn-outline-dark" data-turbo="true">Login</a>
+        </div>
+    </div>
+</nav>
+
+

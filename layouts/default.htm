@@ -1,18 +1,28 @@
+[livewire]
+injectAssets = 1
+==
+{##}
 <!DOCTYPE html>
 <html lang="{{ this.site.locale }}">
 <head>
     {% partial 'head' %}
+    {% styles %}
+    {% scripts %}
+    {{ vite([ 'src/ts/livewire-turbo-adapter.ts' ]) }}  
 </head>
 
 <body>
-
+{% partial 'site/header' %}
 <main>
 
     {% page %}
 
 
 </main>
+{% framework turbo %}
+<script>
+
+</script>
 
 </body>
-
 </html>

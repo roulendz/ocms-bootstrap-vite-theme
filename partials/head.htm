@@ -2,4 +2,5 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ this.page.title ~ ' | ' ~ this.theme.site_name }}</title>
 
-{{ vite([ { path: 'src/ts/main.ts' }, { path: 'src/scss/main.scss' } ]) }}
+{{ vite([ 'src/scss/main.scss' ]) }}
+{{ vite([ 'src/ts/main.ts' ]) }}
