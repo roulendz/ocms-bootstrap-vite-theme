@@ -25,18 +25,20 @@
     "url": "https://github.com/marcsoler/ocms-bootstrap-vite-theme/issues"
   },
   "dependencies": {
-    "bootstrap": "^5.3.3"
+    "bootstrap": "^5.3.3",
+    "laravel-echo": "^2.0.2",
+    "pusher-js": "^8.4.0"
   },
   "devDependencies": {
     "@types/bootstrap": "^5.2.10",
-    "sass": "1.77.4",
-    "typescript": "^5.7.3",
-    "vite": "^6.2.1",
     "cross-env": "^7.0.3",
     "glob": "^11.0.1",
     "postcss": "^8.5.3",
     "postcss-import": "^16.1.0",
-    "postcss-nested": "^6.2.0"
+    "postcss-nested": "^6.2.0",
+    "sass": "1.77.4",
+    "typescript": "^5.7.3",
+    "vite": "^6.2.1"
   },
   "license": "MIT"
 }
