@@ -2,79 +2,11 @@ url = "/websocket-test"
 layout = "default"
 title = "WebSocket Test Page"
 ==
-<div class="container py-5">
-    <h1>WebSocket Test</h1>
-    <div class="card my-4">
-        <div class="card-header">
-            Connection Status
-        </div>
-        <div class="card-body">
-            <p id="status" class="mb-0">Waiting for connection...</p>
-        </div>
-    </div>
+{% component 'reverbClient' %}
 
-    <div class="card mb-4">
-        <div class="card-header">
-            Test Controls
-        </div>
-        <div class="card-body">
-            <button id="testEventBtn" class="btn btn-primary">Send Test Event</button>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-header">
-            Received Messages
-        </div>
-        <div class="card-body">
-            <ul id="message-list" class="list-group">
-                <!-- Messages will appear here -->
-            </ul>
-        </div>
-    </div>
-</div>
 
 {% put scripts %}
 <script>
-document.addEventListener('page:loaded', () => {
-    const statusEl = document.getElementById('status');
-    const messageList = document.getElementById('message-list');
-    const testBtn = document.getElementById('testEventBtn');
 
-    // Add click handler for the test button
-    testBtn.addEventListener('click', async () => {
-        try {
-            const response = await fetch('/logingrupa/reverbws/test-broadcast', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content
-                }
-            });
-            const data = await response.json();
-            console.log('Broadcast result:', data);
-        } catch (error) {
-            console.error('Error sending test event:', error);
-        }
-    });
-
-    // Update connection status (corrected using Pusher client)
-    window.Echo.connector.pusher.connection.bind('state_change', (state: any) => {
-        if (state.current === 'connected') {
-            statusEl.textContent = 'Connected!';
-            statusEl.classList.add('text-success');
-        }
-    });
-
-    // Use authenticated private channel
-    const channel = window.Echo.channel('test-channel');
-    
-    channel.listen('TestEvent', (data) => {
-        const li = document.createElement('li');
-        li.className = 'list-group-item';
-        li.innerHTML = `<strong>${new Date().toLocaleTimeString()}:</strong> ${JSON.stringify(data)}`;
-        messageList.prepend(li);
-    });
-});
 </script>
 {% endput %}
