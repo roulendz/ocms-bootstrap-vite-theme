@@ -2,7 +2,11 @@
  * Type declarations for Livewire, Alpine.js, and OctoberCMS
  * These provide TypeScript compatibility for global browser extensions
  */
-
+/**
+ * Type declarations for Livewire, Alpine.js, and OctoberCMS
+ * These provide TypeScript compatibility for global browser extensions
+ */
+// Filepath: src/ts/types/livewire.d.ts
 // Export the interfaces so they can be imported
 export interface LivewireComponent {
   id: string;

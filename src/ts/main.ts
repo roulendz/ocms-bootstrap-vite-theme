@@ -1,21 +1,24 @@
 // filepath: src/ts/main.ts
 console.log('main.ts loaded');
 import {BootstrapLoader} from './BootstrapLoader';
-
+import type { LivewireInterface } from './types/livewire';
 import Echo from 'laravel-echo';
 
 import Pusher from 'pusher-js';
 
 // Add type extensions for Window
+// Add type extensions for Window
 declare global {
     interface Window {
         Echo: Echo<any>;
         Pusher: typeof Pusher;
+        Livewire: LivewireInterface; // Temporary fix for LivewireComponent typing issue
     }
 }
 
 window.Pusher = Pusher;
 
+// Initialize Echo first
 window.Echo = new Echo({
     broadcaster: 'reverb',
     auth: {
@@ -25,22 +28,21 @@ window.Echo = new Echo({
                 : ''
         }
     },
-    key: import.meta.env.VITE_REVERB_APP_KEY || 'lxns1qy5q8mgn7pfcxz6',
-    wsHost: import.meta.env.VITE_REVERB_HOST || 'bank.test',
+    key: import.meta.env.VITE_REVERB_APP_KEY,
+    wsHost: import.meta.env.VITE_REVERB_HOST,
     wsPort: Number(import.meta.env.VITE_REVERB_PORT ?? 8080),
-    wssPort: Number(import.meta.env.VITE_REVERB_PORT ?? 443),
-    forceTLS: (import.meta.env.VITE_REVERB_SCHEME ?? 'https') === 'https',
+    wssPort: Number(import.meta.env.VITE_REVERB_PORT ?? 8080),
+    forceTLS: false,
     enabledTransports: ['ws', 'wss']
 });
+console.log('ENV LOG: ', import.meta.env);
+console.log('Echo.channel: ', window.Echo);
 
-// Add environment check
-if (!import.meta.env.VITE_REVERB_APP_KEY) {
-    console.error('Reverb configuration missing! Check:');
-    console.error('1. .env file has VITE_REVERB_* variables');
-    console.error('2. Vite server restarted after .env changes');
-}
-
-
+window.Echo.channel('time-deposits-channel')
+    .listen('.timeDepositsCreated', (event: any) => {
+        console.log('Received TimeDepositsCreated event:', event);
+        window.Livewire.dispatch('timeDepositsCreated');
+    });
 /**
  * BootstrapLoader class documentation
  * @class
