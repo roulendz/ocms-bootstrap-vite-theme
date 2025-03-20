@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.3",
+    "dotenv": "^16.4.7",
     "laravel-echo": "^2.0.2",
     "pusher-js": "^8.4.0"
   },
