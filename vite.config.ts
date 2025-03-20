@@ -1,5 +1,7 @@
 import {defineConfig} from 'vite';
 import {basename, resolve} from 'path';
+import dotenv from 'dotenv';
+dotenv.config({ path: resolve(__dirname, '../../.env') });
 
 const themeName = basename(resolve(__dirname));
 
@@ -10,18 +12,16 @@ const input = {
     css: resolve(__dirname, 'src/scss/main.scss'),
 };
 
-export default defineConfig(() => {
+export default defineConfig(({ command }) => {
     return {
-        base: `/themes/${themeName}/assets/`,
+        base: command === 'build' 
+            ? `/themes/${themeName}/assets/build/`
+            : `/themes/${themeName}/assets/`,
         build: {
             rollupOptions: {
                 input,
                 output: {
-                    manualChunks: (id) => {
-                        if (id.includes('livewire-turbo-adapter')) {
-                            return 'livewire-turbo-adapter';
-                        }
-                    }
+                    
                 }
             },
             manifest: true,
@@ -30,7 +30,7 @@ export default defineConfig(() => {
             outDir: 'assets/build',
         },
         server: {
-            cors: 'http://bank.test',
+            cors: 'https://bank.test',
         }
     }
 });
