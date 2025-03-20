@@ -5,7 +5,7 @@
  * the default event handlers and providing compatibility between different
  * versions of Livewire.
  */
-
+console.log('Livewire-Turbo Adapter loaded');
 // Import types from the declaration file
 import type { LivewireComponent } from './types/livewire';
 
@@ -26,9 +26,17 @@ interface ComponentData {
 (function(): void {
   // Safety check - make sure Livewire is loaded
   if (typeof window.Livewire === 'undefined') {
-    console.error('Livewire-Turbo Adapter: window.Livewire is undefined. Make sure @livewireScripts is placed above this script.');
+    console.error('Livewire-Turbo Adapter: window.Livewire is undefined');
     return;
   }
+
+  // // Verify Echo initialization
+  // if (typeof window.Echo === 'undefined') {
+  //   console.error('Livewire-Turbo Adapter: window.Echo undefined - Check:');
+  //   console.error('1. VITE_REVERB_APP_KEY in .env');
+  //   console.error('2. Script loading order in layout');
+  //   return;
+  // }
 
   // Try to remove the original event listeners if they exist
   try {
